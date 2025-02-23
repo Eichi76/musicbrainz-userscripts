@@ -1,8 +1,35 @@
+# _Surprise!_
+
+- Yes, I can program a little!
+- Yes, the preferred language of programmers is English!
+
+Do I speak English well and fluently? **NO!**
+
+For this reason and because this project is mainly about a German-speaking phenomenon, I will write all texts in German. I don't feel like using the Deepl Translator to translate texts every time.
+For the scripts I will try to include multilingual functionality, but the code comments will probably be in German.
+
+So now I'm switching to German!
+
 # musicbrainz-userscripts
 
-**[Userscripts](https://en.wikipedia.org/wiki/Userscript) for [MusicBrainz.org](https://musicbrainz.org)**
+**[Userscripts](https://en.wikipedia.org/wiki/Userscript) für [MusicBrainz.org](https://musicbrainz.org)**
 
-This project deals with **userscripts** which should help to add releases and further entries to the **MusicBrainz.org** project. The main focus of the scripts is on audio drama releases.
+Dieses Projekt beschäftigt sich mit **Userscripts**, die helfen sollen, Veröffentlichungen und andere Einträge zum **MusicBrainz.org** Projekt hinzuzufügen. Der Schwerpunkt der Skripte liegt auf Hörspielpublikationen.
 
-You need a **userscripts** manager browser extension such as **[Tampermonkey](https://www.tampermonkey.net/)**, which manages the userscripts for you.
-To install a script, simply click on the _Install_ button for the desired script on this page.
+Sie benötigen eine **Userskripten-Manager-Browsererweiterung** wie z.B. **[Tampermonkey](https://www.tampermonkey.net/)**, die die Userskripte für Dich verwaltet.
+Um ein Skript zu installieren, klicke einfach auf die Schaltfläche _Installieren_ für das gewünschte Skript auf dieser Seite.
+
+## Userscripts
+
+### Holysoft Musicbrainz Import
+
+Importiert Hörspielproduktionen aus dem Holysoft Shop und erstellt einen String, um die entsprechende Crew bei Musicbrainz hinzuzufügen.
+- Erstellt ein Formular auf der linken Seite unter dem Cover bei Holysoft Produktionen im **[Holysoft-Shop](https://shop.holysoft.de/)**
+- Erlaubt dem Benutzer, permanente Namenszuweisungen zu bestehenden MBIDs des Künstlers einzugeben.
+- Erkennt Serie/Folgennummer/Folgenname und erzeugt daraus einen eindeutigen Albumnamen, der geändert werden kann.
+- Identifiziert die Anzahl der Medien der Veröffentlichung, sofern diese Information auf der Seite verfügbar ist.
+- Für jedes Medium kann die Anzahl der Titel festgelegt werden, die dann mit beispielhaften Titelnamen an Musicbrainz übergeben werden.
+- Erstellt einen Button, um die Sprecherrollen in die Zwischenablage zu kopieren, die dann mit **[Kellnerds Voice Actor Credits-Skript](https://github.com/kellnerd/musicbrainz-scripts?tab=readme-ov-file#voice-actor-credits)** eingefügt werden können.
+
+[![Install](https://img.shields.io/badge/Install-success.svg?style=for-the-badge&logo=tampermonkey)](dist/holysoft.user.js?raw=1)
+[![Source](https://img.shields.io/badge/Source-grey.svg?style=for-the-badge&logo=github)](dist/holysoft.user.js)
