@@ -5,8 +5,8 @@
 // @author        Eichi76
 // @description   Importiert Hörspielproduktionen aus dem Holysoft Shop und erstellt einen String, um die entsprechende Crew bei Musicbrainz hinzuzufügen.
 // @homepageURL   https://github.com/Eichi76/musicbrainz-userscripts#holysoft-musicbrainz-import
-// @downloadURL   https://raw.github.com/Eichi76/musicbrainz-userscripts/dev/dist/holysoft.user.js
-// @updateURL     https://raw.github.com/Eichi76/musicbrainz-userscripts/dev/dist/holysoft.user.js
+// @downloadURL   https://raw.github.com/Eichi76/musicbrainz-userscripts/main/dist/holysoft.user.js
+// @updateURL     https://raw.github.com/Eichi76/musicbrainz-userscripts/main/dist/holysoft.user.js
 // @supportURL    https://github.com/Eichi76/musicbrainz-userscripts/issues
 // @grant         none
 // @match         *://shop.holysoft.de/produkte/*
