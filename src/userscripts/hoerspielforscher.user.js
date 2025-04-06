@@ -1062,7 +1062,6 @@ async function createBasicUI() {
 						//let copyString = episode['actors'].map((credit) => `${credit.roleName ?? ''} - ${credit.artist}`).join('\n');
 						let copyString = '';
 						if (!event.shiftKey) {
-							console.log('TODO: Kopiere Schauspieler im alten Format in die Zwischenablage');
 							copyString = episode.actors
 								.map((credit) => `${credit.mb.attributesTypes[0].text ?? ''} - ${credit.mb.name}`)
 								.join('\n');
@@ -1070,6 +1069,7 @@ async function createBasicUI() {
 						if (event.shiftKey) {
 							//copyString = JSON.stringify(jsonFromCrew());
 							const crewArray = [];
+
 							episode.crew.forEach((obj) => {
 								//console.log('obj', obj);
 								crewArray.push(obj.mb);
@@ -1078,7 +1078,9 @@ async function createBasicUI() {
 								//console.log('obj', obj);
 								crewArray.push(obj.mb);
 							});
-							console.log('TODO: Kopiere komplette Daten für Beziehungseditor in die Zwischenablage');
+							if (crewArray.length) {
+								crewArray.push({ importUrl: episode.releaseinfos.releaseUrl });
+							}
 							copyString = JSON.stringify(crewArray);
 						}
 						console.log(copyString);
