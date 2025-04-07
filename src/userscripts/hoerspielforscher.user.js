@@ -7,7 +7,8 @@ import { nameToMBIDCache } from '@kellnerd/musicbrainz-scripts/src/nameToMBIDCac
 import { createMBIDInput } from '@kellnerd/musicbrainz-scripts/src/inputMBID.js';
 import { createReleaseSeederForm } from '@kellnerd/musicbrainz-scripts/src/seeding.js';
 console.log('Hörspielforscher triggered');
-
+// TODO: Beim einlesen der Künstler bei "und" aufteilen
+// TODO: Wenn keine Crew bzw Sprecher vorhanden verhindern das der Kopier Button geklickt werden kann
 // #region little helpers
 /**
  * @description  Entfernt unnötig Zeichen aus dem String
@@ -684,9 +685,10 @@ function getReleaseDate(date) {
 	}
 	if (/^\d{4}$/.test(date)) {
 		let { year } = /^(?<year>\d{4})$/.exec(date).groups;
-		let dateObject = zipObject(['year', 'country'], [year, 'de']) ?? '';
+		let dateObject = { date: zipObject(['year'], [year ?? '']), country: 'de' };
 		return { events: [dateObject] };
 	}
+	return { events: [{ country: 'de' }] };
 }
 
 /**

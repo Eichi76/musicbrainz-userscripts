@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Hoerspielforscher Musicbrainz Import
-// @version       2025.4.6
+// @version       2025.4.7
 // @namespace     https://github.com/Eichi76/musicbrainz-userscripts
 // @author        Eichi76
 // @description   Importiert Hörspielproduktionen von Hoerspielforschern
@@ -535,7 +535,8 @@
 	}
 
 	console.log('Hörspielforscher triggered');
-
+	// TODO: Beim einlesen der Künstler bei "und" aufteilen
+	// TODO: Wenn keine Crew bzw Sprecher vorhanden verhindern das der Kopier Button geklickt werden kann
 	// #region little helpers
 	/**
 	 * @description  Entfernt unnötig Zeichen aus dem String
@@ -1210,9 +1211,10 @@ td.right {
 		}
 		if (/^\d{4}$/.test(date)) {
 			let { year } = /^(?<year>\d{4})$/.exec(date).groups;
-			let dateObject = zipObject(['year', 'country'], [year, 'de']) ?? '';
+			let dateObject = { date: zipObject(['year'], [year ?? '']), country: 'de' };
 			return { events: [dateObject] };
 		}
+		return { events: [{ country: 'de' }] };
 	}
 
 	/**
