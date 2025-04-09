@@ -117,7 +117,17 @@ td.right {
      width: 100%;
      box-sizing: border-box;
 }
-`;
+#importerContainer button {
+	cursor: pointer;
+}
+#importerContainer > button {
+	width: 100%;
+	background-color: green;
+	color: white;
+	border-color: white;
+	border-width: 5px;
+	margin: 4px;
+}`;
 const langObject = {
 	en: {
 		seedbutton: {
@@ -344,8 +354,6 @@ function createCrew() {
 	}
 	return ret;
 }
-
-/** @type {*} Initiale Informationen über das aufgerufene Hörspiel */
 
 const episode = { ...createCrew(), actors: collectActors(), releaseinfos: getReleaseInfos() };
 
@@ -782,9 +790,7 @@ async function createBasicUI() {
 	const mbImporter = createElement('div', { id: 'mbImporter' });
 	mbImporter.hidden = true;
 	const importerContainer = createElement('div', { id: 'importerContainer' });
-	const containerButton = createElement('button', {
-		style: 'width: 100%; background-color: green; color: white; border-color: white; border-width: 5px; margin: 4px;',
-	});
+	const containerButton = createElement('button', {});
 	const icon = document.createElement('img');
 	icon.src = '//musicbrainz.org/favicon.ico';
 	let containerText = createElement('span', { id: 'containerText' }, 'MUSICBRAINZ IMPORTER ÖFFNEN');
