@@ -7,7 +7,7 @@ import { nameToMBIDCache } from '@kellnerd/musicbrainz-scripts/src/nameToMBIDCac
 import { createMBIDInput } from '@kellnerd/musicbrainz-scripts/src/inputMBID.js';
 import { createReleaseSeederForm } from '@kellnerd/musicbrainz-scripts/src/seeding.js';
 console.log('Hörspielforscher triggered');
-// TODO: Beim einlesen der Künstler bei "und" aufteilen
+
 // TODO: Wenn keine Crew bzw Sprecher vorhanden verhindern das der Kopier Button geklickt werden kann
 // #region little helpers
 /**
@@ -315,7 +315,7 @@ const mediumsTyps = {
 };
 
 /** @type {*} Array mit Einträgen welche nicht als Crewmitglied gewertet werden */
-const blacklist = ['Studio EUROPA', 'Tonstudio Braun'];
+const blacklist = ['Studio EUROPA', 'Tonstudio Braun', 'Bastei-Verlag'];
 
 /** @type {*} Object zum mappen von ausgeschriebenen Monatsnamen zur Zahl */
 const months = new Map([
@@ -523,7 +523,7 @@ function collectCrew() {
 			e.artists = e.artists.replaceAll(/(\(.*?\))/g, '').trim();
 			e.artists = e.artists.replaceAll(/[:•]/g, '').trim();
 
-			e.artists = e.artists.split(', ').map((f) => {
+			e.artists = e.artists.split(/, +| und +/).map((f) => {
 				return f.trim();
 			});
 			return e;
