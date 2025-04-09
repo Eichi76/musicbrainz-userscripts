@@ -334,26 +334,6 @@ const months = new Map([
 ]);
 
 const notAudioWork = ['Nach dem Roman von', 'Vorlage', 'nach dem Jugendbuch von'];
-function createCrew() {
-	let fullCrew = collectCrew();
-	let crew = [];
-	let booktemplate = [];
-	let ret = {};
-	fullCrew.map((member) => {
-		if (notAudioWork.includes(member.siteJob)) {
-			booktemplate.push(member);
-		} else {
-			crew.push(member);
-		}
-	});
-	if (crew.length) {
-		ret['crew'] = [...crew];
-	}
-	if (booktemplate.length) {
-		ret['notForAudioProduction'] = [...booktemplate];
-	}
-	return ret;
-}
 
 const episode = { ...createCrew(), actors: collectActors(), releaseinfos: getReleaseInfos() };
 
@@ -362,47 +342,6 @@ const websiteInfos = {
 	Additionals: [...addAdditionalInformation()],
 	Labels: [...episode.releaseinfos.labels],
 };
-
-function addAdditionalInformation() {
-	let ret = [];
-	let releaseDate = {
-		releaseDateEstimated: episode.releaseinfos.releaseDateEstimated,
-		...episode.releaseinfos.releaseDate,
-	};
-
-	if (episode.releaseinfos?.name) {
-		ret.push({ reltyp: 'additional', siteJob: 'Veröffentlichungs Name', name: episode.releaseinfos.name });
-	}
-	if (episode.releaseinfos?.name) {
-		ret.push({ reltyp: 'additional', siteJob: 'Veröffentlichungsgruppen Nane', name: '' });
-	}
-	if (episode.releaseinfos?.serieName) {
-		ret.push({ reltyp: 'additional', siteJob: 'Serien Nane', name: episode.releaseinfos.serieName });
-	}
-	if (episode.releaseinfos?.serieName) {
-		ret.push({ reltyp: 'additional', siteJob: 'Folgennummer', name: episode.releaseinfos.episodeNr });
-	}
-	if (episode.releaseinfos?.releaseDate) {
-		ret.push({ reltyp: 'additional', siteJob: 'Veröffentlichungs Datum', name: releaseDate });
-	}
-	if (episode.releaseinfos?.barcode) {
-		ret.push({ reltyp: 'additional', siteJob: 'Barcode', name: episode.releaseinfos.barcode });
-	}
-	if (episode.releaseinfos?.mediumsinfo.mbpackaging) {
-		ret.push({ reltyp: 'additional', siteJob: 'Verpackung', name: episode.releaseinfos?.mediumsinfo.mbpackaging });
-	}
-	if (episode.releaseinfos?.mediumsinfo.mbmedium) {
-		ret.push({ reltyp: 'additional', siteJob: 'Medium Art', name: episode.releaseinfos?.mediumsinfo.mbmedium });
-	}
-	if (episode.releaseinfos.mediumsinfo.sides && episode.releaseinfos.runtimes) {
-		ret.push({
-			reltyp: 'additional',
-			siteJob: 'Medium Anzahl',
-			name: episode.releaseinfos.runtimes.length / episode.releaseinfos.mediumsinfo.sides,
-		});
-	}
-	return ret;
-}
 
 const tableNames = {
 	'tbl-Available-Artists': 'Verfügbare Künstler',
@@ -425,6 +364,27 @@ const additionalsIdMap = {
 // #endregion Constants
 
 // #region Funktionen zum sammeln von Seiten Infos
+
+function createCrew() {
+	let fullCrew = collectCrew();
+	let crew = [];
+	let booktemplate = [];
+	let ret = {};
+	fullCrew.map((member) => {
+		if (notAudioWork.includes(member.siteJob)) {
+			booktemplate.push(member);
+		} else {
+			crew.push(member);
+		}
+	});
+	if (crew.length) {
+		ret['crew'] = [...crew];
+	}
+	if (booktemplate.length) {
+		ret['notForAudioProduction'] = [...booktemplate];
+	}
+	return ret;
+}
 
 /**
  * @description Erstellt ein Objekt mit allen relevanten Beteiligten und deren Aufgaben an der Veräffentlichung
@@ -722,6 +682,47 @@ function getAdditionalInfos() {
 	});
 
 	return elements;
+}
+
+function addAdditionalInformation() {
+	let ret = [];
+	let releaseDate = {
+		releaseDateEstimated: episode.releaseinfos.releaseDateEstimated,
+		...episode.releaseinfos.releaseDate,
+	};
+
+	if (episode.releaseinfos?.name) {
+		ret.push({ reltyp: 'additional', siteJob: 'Veröffentlichungs Name', name: episode.releaseinfos.name });
+	}
+	if (episode.releaseinfos?.name) {
+		ret.push({ reltyp: 'additional', siteJob: 'Veröffentlichungsgruppen Nane', name: '' });
+	}
+	if (episode.releaseinfos?.serieName) {
+		ret.push({ reltyp: 'additional', siteJob: 'Serien Nane', name: episode.releaseinfos.serieName });
+	}
+	if (episode.releaseinfos?.serieName) {
+		ret.push({ reltyp: 'additional', siteJob: 'Folgennummer', name: episode.releaseinfos.episodeNr });
+	}
+	if (episode.releaseinfos?.releaseDate) {
+		ret.push({ reltyp: 'additional', siteJob: 'Veröffentlichungs Datum', name: releaseDate });
+	}
+	if (episode.releaseinfos?.barcode) {
+		ret.push({ reltyp: 'additional', siteJob: 'Barcode', name: episode.releaseinfos.barcode });
+	}
+	if (episode.releaseinfos?.mediumsinfo.mbpackaging) {
+		ret.push({ reltyp: 'additional', siteJob: 'Verpackung', name: episode.releaseinfos?.mediumsinfo.mbpackaging });
+	}
+	if (episode.releaseinfos?.mediumsinfo.mbmedium) {
+		ret.push({ reltyp: 'additional', siteJob: 'Medium Art', name: episode.releaseinfos?.mediumsinfo.mbmedium });
+	}
+	if (episode.releaseinfos.mediumsinfo.sides && episode.releaseinfos.runtimes) {
+		ret.push({
+			reltyp: 'additional',
+			siteJob: 'Medium Anzahl',
+			name: episode.releaseinfos.runtimes.length / episode.releaseinfos.mediumsinfo.sides,
+		});
+	}
+	return ret;
 }
 
 /**
