@@ -223,11 +223,19 @@ const jobsObject = {
 		mb: { name: '', targetType: 'artist', linktype: 'Writer', attributesTypes: [] },
 		relTyp: 'Writer',
 	},
+	Hörspielbuch: {
+		mb: { name: '', targetType: 'artist', linktype: 'Writer', attributesTypes: [] },
+		relTyp: 'Writer',
+	},
 	Spoken_vocals: {
 		mb: { name: '', targetType: 'artist', linktype: 'Vocal', attributesTypes: [{ type: 'Spoken_vocals', text: '' }] },
 		relTyp: 'Spoken_vocals',
 	},
 	Illustration: {
+		mb: { name: '', targetType: 'artist', linktype: 'Illustration', attributesTypes: [] },
+		relTyp: 'Illustration',
+	},
+	Coverillustration: {
 		mb: { name: '', targetType: 'artist', linktype: 'Illustration', attributesTypes: [] },
 		relTyp: 'Illustration',
 	},
@@ -238,6 +246,10 @@ const jobsObject = {
 			linktype: 'Audio_director',
 			attributesTypes: [{ type: 'assistant', text: '' }],
 		},
+		relTyp: 'Audio_director',
+	},
+	Sprachregie: {
+		mb: { name: '', targetType: 'artist', linktype: 'Audio_director', attributesTypes: [] },
 		relTyp: 'Audio_director',
 	},
 	Regie: {
@@ -252,9 +264,13 @@ const jobsObject = {
 		mb: { name: '', targetType: 'artist', linktype: 'Sound_effects', attributesTypes: [] },
 		relTyp: 'Sound_effects',
 	},
-	'Nach dem Roman von': {
-		mb: { name: '', targetType: 'artist', linktype: 'Writer', attributesTypes: [] },
-		relTyp: 'Writer',
+	Geräuschemacher: {
+		mb: { name: '', targetType: 'artist', linktype: 'Sound_effects', attributesTypes: [] },
+		relTyp: 'Sound_effects',
+	},
+	'Foley Recordings': {
+		mb: { name: '', targetType: 'artist', linktype: 'Sound_effects', attributesTypes: [] },
+		relTyp: 'Sound_effects',
 	},
 	Vorlage: {
 		mb: { name: '', targetType: 'artist', linktype: 'Writer', attributesTypes: [] },
@@ -267,6 +283,18 @@ const jobsObject = {
 	'nach dem Jugendbuch von': {
 		mb: { name: '', targetType: 'artist', linktype: 'Writer', attributesTypes: [] },
 		relTyp: 'Writer',
+	},
+	'Nach dem Roman von': {
+		mb: { name: '', targetType: 'artist', linktype: 'Writer', attributesTypes: [] },
+		relTyp: 'Writer',
+	},
+	'Nach einem Buch von ': {
+		mb: { name: '', targetType: 'artist', linktype: 'Writer', attributesTypes: [] },
+		relTyp: 'Writer',
+	},
+	Redaktion: {
+		mb: { name: '', targetType: 'artist', linktype: 'Nothing', attributesTypes: [] },
+		relTyp: 'Nothing',
 	},
 	//'Ein Hörspiel nach dem Jugendbuch von': { id: 54, uuid: 'ca7a474a-a1cd-4431-9230-56a17f553090', relTyp: 'Writer' },
 };
@@ -310,6 +338,7 @@ const mediumsTyps = {
 	'Doppel-CD-Box': { sides: 1, format: ['Audio CD', 'Audio-CD'], mbmedium: 'CD', mbpackaging: 'Box' },
 	'3-CD': { sides: 1, format: ['Audio CD', 'Audio-CD'], mbmedium: 'CD', mbpackaging: 'Jewel case' },
 	'3-CD-Schuber': { sides: 1, format: ['Audio CD', 'Audio-CD'], mbmedium: 'CD', mbpackaging: 'Box' },
+	'3-CD-Box': { sides: 1, format: ['Audio CD', 'Audio-CD'], mbmedium: 'CD', mbpackaging: 'Box' },
 	'Audio-Dateien': { sides: 1, format: ['Audio-Dateien'], mbmedium: 'Digital Media', mbpackaging: 'None' },
 	Stream: { sides: 1, format: ['Audio-Dateien'], mbmedium: 'Digital Media', mbpackaging: 'None' },
 };
@@ -419,7 +448,7 @@ function collectCrew() {
 				lineJobIndexes.forEach((key, index) => {
 					if (lineJobIndexes.length > index + 1) {
 						let between = line.slice(lineJobIndexes[index].lastIndex, lineJobIndexes[index + 1].index).trim();
-						if (between === 'und' || between === ',') {
+						if (between === 'und' || between === ',' || between === '&') {
 							jobArtist.jobs.push(key.job);
 						} else {
 							jobArtist.jobs.push(key.job);
@@ -456,7 +485,10 @@ function collectCrew() {
 						member.mb['name'] = artist.trim();
 						member['siteJob'] = job;
 						members.forEach((element) => {
-							if (element.mb.linktype + element.mb.name === member.mb.linktype + member.mb.name) {
+							if (
+								element.mb.linktype + element.mb.name === member.mb.linktype + member.mb.name ||
+								member.mb.linktype == 'Nothing'
+							) {
 								add = false;
 							}
 						});
