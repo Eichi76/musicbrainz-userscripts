@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Hoerspielforscher Musicbrainz Import
-// @version       2025.4.22
+// @version       2025.4.24
 // @namespace     https://github.com/Eichi76/musicbrainz-userscripts
 // @author        Eichi76
 // @description   Importiert Hörspielproduktionen von Hoerspielforschern
@@ -64,7 +64,9 @@
 		sections = sections.map((section) => section.trim());
 
 		if (typeof GM_info !== 'undefined') {
-			sections.push(`${GM_info.script.name} (v${GM_info.script.version}, ${GM_info.script.namespace})`);
+			//sections.push(`${GM_info.script.name} (v${GM_info.script.version}, ${GM_info.script.namespace})`);
+			sections.push(`${GM_info.script.name} (Eichi76 dev version) ( (v${GM_info.script.version})`);
+
 		}
 
 		// drop empty sections and keep only the last occurrence of duplicate sections
@@ -1745,6 +1747,10 @@ td.right {
 			}
 			if (episode.releaseinfos.mediumsinfo.mbpackaging) {
 				ret['packaging'] = episode.releaseinfos.mediumsinfo.mbpackaging;
+			}
+			let relGrpMBID = qs('#tr-ad-relGrpName > td > input').dataset.mbid;
+			if (relGrpMBID !== undefined) {
+				ret['release_group'] = relGrpMBID;
 			}
 			return ret;
 			function collectArtistToSeed() {

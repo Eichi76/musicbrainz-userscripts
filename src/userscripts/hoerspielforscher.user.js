@@ -1220,6 +1220,10 @@ async function createBasicUI() {
 		if (episode.releaseinfos.mediumsinfo.mbpackaging) {
 			ret['packaging'] = episode.releaseinfos.mediumsinfo.mbpackaging;
 		}
+		let relGrpMBID = qs('#tr-ad-relGrpName > td > input').dataset.mbid;
+		if (relGrpMBID !== undefined) {
+			ret['release_group'] = relGrpMBID;
+		}
 		return ret;
 		function collectArtistToSeed() {
 			let seedingArtistsInputs = qsa('#tb-Seeding-Artists > tr > td > input');
