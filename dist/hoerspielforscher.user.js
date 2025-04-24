@@ -1307,7 +1307,8 @@ td.right {
 
 	function getReleaseUrl() {
 		let url = new URL(window.location);
-		return `${url.origin + url.pathname + url.search}`;
+		console.log('url', url);
+		return `${url.origin + url.pathname + url.search.split('&')[0]}`;
 	}
 
 	/**
