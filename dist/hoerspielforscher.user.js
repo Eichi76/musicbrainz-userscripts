@@ -1063,7 +1063,7 @@ td.right {
 	 */
 	function collectActors() {
 		let actors = [];
-		let castLists = qsa('table.release-cast-list');
+		let castLists = qsa('table.release-cast-list:not(.recycled-releases)');
 		castLists.forEach((list) => {
 			[...qsa('tr', list)].map((tr) => {
 				let newNode = tr.cloneNode(true);
