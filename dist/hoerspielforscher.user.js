@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Hoerspielforscher Musicbrainz Import
-// @version       2025.4.24
+// @version       2025.4.28
 // @namespace     https://github.com/Eichi76/musicbrainz-userscripts
 // @author        Eichi76
 // @description   Importiert Hörspielproduktionen von Hoerspielforschern
@@ -1063,26 +1063,29 @@ td.right {
 	 */
 	function collectActors() {
 		let actors = [];
-		[...qsa('tr', qs('table.release-cast-list'))].map((tr) => {
-			let newNode = tr.cloneNode(true);
-			let roleName = qs('.role', tr).innerText;
-			if (!qs('.name > i', newNode) && qs('.name > i', newNode)?.innerText != 'unbekannt') {
-				let actor = structuredClone(jobsObject.Spoken_vocals);
+		let castLists = qsa('table.release-cast-list');
+		castLists.forEach((list) => {
+			[...qsa('tr', list)].map((tr) => {
+				let newNode = tr.cloneNode(true);
+				let roleName = qs('.role', tr).innerText;
+				if (!qs('.name > i', newNode) && qs('.name > i', newNode)?.innerText != 'unbekannt') {
+					let actor = structuredClone(jobsObject.Spoken_vocals);
 
-				//actor = { ...jobsObject.Spoken_vocals };
+					//actor = { ...jobsObject.Spoken_vocals };
 
-				let footnote = qs('.footnote-number', newNode);
-				if (footnote) {
-					footnote.parentNode.removeChild(footnote);
+					let footnote = qs('.footnote-number', newNode);
+					if (footnote) {
+						footnote.parentNode.removeChild(footnote);
+					}
+					actor.mb.attributesTypes[0].text = roleName;
+					if (qs('.literal > span', newNode)) {
+						actor['creditedAs'] = cleanString(qs('.literal > span', newNode)?.innerText);
+						qs('.literal', newNode).parentNode.removeChild(qs('.literal', newNode));
+					}
+					actor.mb.name = qs('.name', newNode).innerText.trim();
+					actors.push(actor);
 				}
-				actor.mb.attributesTypes[0].text = roleName;
-				if (qs('.literal > span', newNode)) {
-					actor['creditedAs'] = cleanString(qs('.literal > span', newNode)?.innerText);
-					qs('.literal', newNode).parentNode.removeChild(qs('.literal', newNode));
-				}
-				actor.mb.name = qs('.name', newNode).innerText.trim();
-				actors.push(actor);
-			}
+			});
 		});
 		return actors;
 	}
@@ -1307,7 +1310,6 @@ td.right {
 
 	function getReleaseUrl() {
 		let url = new URL(window.location);
-		console.log('url', url);
 		return `${url.origin + url.pathname + url.search.split('&')[0]}`;
 	}
 
