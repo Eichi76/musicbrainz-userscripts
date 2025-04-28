@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Hoerspielforscher Musicbrainz Import
-// @version       2025.4.28
+// @version       2025.4.28.122746
 // @namespace     https://github.com/Eichi76/musicbrainz-userscripts
 // @author        Eichi76
 // @description   Importiert Hörspielproduktionen von Hoerspielforschern
