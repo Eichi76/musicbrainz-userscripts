@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Hoerspielforscher Musicbrainz Import
-// @version       2025.4.28.122746
+// @version       2025.4.30.1746
 // @namespace     https://github.com/Eichi76/musicbrainz-userscripts
 // @author        Eichi76
 // @description   Importiert Hörspielproduktionen von Hoerspielforschern
@@ -795,6 +795,10 @@ td.right {
 			relTyp: 'Sound_effects',
 		},
 		Geräuschemacher: {
+			mb: { name: '', targetType: 'artist', linktype: 'Sound_effects', attributesTypes: [] },
+			relTyp: 'Sound_effects',
+		},
+		Geräusche: {
 			mb: { name: '', targetType: 'artist', linktype: 'Sound_effects', attributesTypes: [] },
 			relTyp: 'Sound_effects',
 		},

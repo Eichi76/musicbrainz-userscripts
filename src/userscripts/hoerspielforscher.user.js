@@ -268,6 +268,10 @@ const jobsObject = {
 		mb: { name: '', targetType: 'artist', linktype: 'Sound_effects', attributesTypes: [] },
 		relTyp: 'Sound_effects',
 	},
+	Geräusche: {
+		mb: { name: '', targetType: 'artist', linktype: 'Sound_effects', attributesTypes: [] },
+		relTyp: 'Sound_effects',
+	},
 	'Foley Recordings': {
 		mb: { name: '', targetType: 'artist', linktype: 'Sound_effects', attributesTypes: [] },
 		relTyp: 'Sound_effects',
