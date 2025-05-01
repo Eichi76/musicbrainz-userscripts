@@ -47,3 +47,13 @@ Importiert Hörspielproduktionen aus dem Holysoft Shop und erstellt einen String
 
 [![Install](https://img.shields.io/badge/Install-success.svg?style=for-the-badge&logo=tampermonkey)](dist/holysoft.user.js?raw=1)
 [![Source](https://img.shields.io/badge/Source-grey.svg?style=for-the-badge&logo=github)](dist/holysoft.user.js)
+
+## Bookmarklets
+
+### [Copy Hoerspielforscher Url](src/bookmarklets/copyHoerspielforscherUrl.js)
+
+Kopiert den relevanten Teil einer Hoerspielforscher URL in die Zwischenablage
+
+```js
+javascript:(()=>{const i=new URL(window.location);"https://hoerspielforscher.de"==i.origin&&navigator.clipboard?.writeText(""+(i.origin+i.pathname+i.search.split("&")[0]))})();
+```
