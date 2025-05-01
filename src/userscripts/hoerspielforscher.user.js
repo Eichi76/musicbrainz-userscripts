@@ -353,7 +353,7 @@ const blacklist = [
 	'Tonstudio Braun',
 	'Bastei-Verlag',
 	'Comicon S.L.',
-	'Eine Produktion der Sonz Music Entertainment Germanz GmbH',
+	'Eine Produktion der Sony Music Entertainment Germany GmbH',
 ];
 
 /** @type {*} Object zum mappen von ausgeschriebenen Monatsnamen zur Zahl */

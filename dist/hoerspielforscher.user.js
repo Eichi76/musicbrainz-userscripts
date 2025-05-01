@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Hoerspielforscher Musicbrainz Import
-// @version       2025.5.1.113356
+// @version       2025.5.1.124526
 // @namespace     https://github.com/Eichi76/musicbrainz-userscripts
 // @author        Eichi76
 // @description   Importiert Hörspielproduktionen von Hoerspielforschern
@@ -883,7 +883,7 @@ td.right {
 		'Tonstudio Braun',
 		'Bastei-Verlag',
 		'Comicon S.L.',
-		'Eine Produktion der Sonz Music Entertainment Germanz GmbH',
+		'Eine Produktion der Sony Music Entertainment Germany GmbH',
 	];
 
 	/** @type {*} Object zum mappen von ausgeschriebenen Monatsnamen zur Zahl */
