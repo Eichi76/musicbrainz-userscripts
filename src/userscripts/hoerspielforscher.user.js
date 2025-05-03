@@ -354,6 +354,7 @@ const blacklist = [
 	'Bastei-Verlag',
 	'Comicon S.L.',
 	'Eine Produktion der Sony Music Entertainment Germany GmbH',
+	'ear2brain productions',
 ];
 
 /** @type {*} Object zum mappen von ausgeschriebenen Monatsnamen zur Zahl */
