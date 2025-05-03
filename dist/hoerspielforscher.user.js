@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Hoerspielforscher Musicbrainz Import
-// @version       2025.5.3.9403
+// @version       2025.5.3.171616
 // @namespace     https://github.com/Eichi76/musicbrainz-userscripts
 // @author        Eichi76
 // @description   Importiert Hörspielproduktionen von Hoerspielforschern
@@ -887,6 +887,8 @@ td.right {
 		'ear2brain productions',
 	];
 
+	const blacklistRolenames = ['(keine Rollenangabe)'];
+
 	/** @type {*} Object zum mappen von ausgeschriebenen Monatsnamen zur Zahl */
 	const months = new Map([
 		['Januar', '1'],
@@ -1076,9 +1078,16 @@ td.right {
 		let actors = [];
 		let castLists = qsa('table.release-cast-list:not(.recycled-releases)');
 		castLists.forEach((list) => {
+			let newRole = true;
+			let roleName = '';
 			[...qsa('tr', list)].map((tr) => {
 				let newNode = tr.cloneNode(true);
-				let roleName = qs('.role', tr).innerText;
+				if (newRole) {
+					roleName = qs('.role', tr).innerText;
+				}
+				if (blacklistRolenames.includes(roleName)) {
+					roleName = '';
+				}
 				if (!qs('.name > i', newNode) && qs('.name > i', newNode)?.innerText != 'unbekannt') {
 					let actor = structuredClone(jobsObject.Spoken_vocals);
 
@@ -1095,6 +1104,12 @@ td.right {
 					}
 					actor.mb.name = qs('.name', newNode).innerText.trim();
 					actors.push(actor);
+				}
+				if (qs('.role', tr).style[0]) {
+					newRole = false;
+					console.log('Style', qs('.role', tr).style[0]);
+				} else {
+					newRole = true;
 				}
 			});
 		});

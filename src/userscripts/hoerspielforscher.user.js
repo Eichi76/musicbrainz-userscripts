@@ -357,6 +357,8 @@ const blacklist = [
 	'ear2brain productions',
 ];
 
+const blacklistRolenames = ['(keine Rollenangabe)'];
+
 /** @type {*} Object zum mappen von ausgeschriebenen Monatsnamen zur Zahl */
 const months = new Map([
 	['Januar', '1'],
@@ -546,9 +548,16 @@ function collectActors() {
 	let actors = [];
 	let castLists = qsa('table.release-cast-list:not(.recycled-releases)');
 	castLists.forEach((list) => {
+		let newRole = true;
+		let roleName = '';
 		[...qsa('tr', list)].map((tr) => {
 			let newNode = tr.cloneNode(true);
-			let roleName = qs('.role', tr).innerText;
+			if (newRole) {
+				roleName = qs('.role', tr).innerText;
+			}
+			if (blacklistRolenames.includes(roleName)) {
+				roleName = '';
+			}
 			if (!qs('.name > i', newNode) && qs('.name > i', newNode)?.innerText != 'unbekannt') {
 				let actor = structuredClone(jobsObject.Spoken_vocals);
 
@@ -565,6 +574,12 @@ function collectActors() {
 				}
 				actor.mb.name = qs('.name', newNode).innerText.trim();
 				actors.push(actor);
+			}
+			if (qs('.role', tr).style[0]) {
+				newRole = false;
+				console.log('Style', qs('.role', tr).style[0]);
+			} else {
+				newRole = true;
 			}
 		});
 	});
