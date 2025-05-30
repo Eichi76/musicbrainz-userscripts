@@ -350,6 +350,7 @@ const mediumsTyps = {
 /** @type {*} Array mit Einträgen welche nicht als Crewmitglied gewertet werden */
 const blacklist = [
 	'Studio EUROPA',
+	'Eine Studio EUROPA-Produktion',
 	'Tonstudio Braun',
 	'Bastei-Verlag',
 	'Comicon S.L.',

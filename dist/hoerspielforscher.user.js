@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Hoerspielforscher Musicbrainz Import
-// @version       2025.5.3.171616
+// @version       2025.5.30.153620
 // @namespace     https://github.com/Eichi76/musicbrainz-userscripts
 // @author        Eichi76
 // @description   Importiert Hörspielproduktionen von Hoerspielforschern
@@ -880,6 +880,7 @@ td.right {
 	/** @type {*} Array mit Einträgen welche nicht als Crewmitglied gewertet werden */
 	const blacklist = [
 		'Studio EUROPA',
+		'Eine Studio EUROPA-Produktion',
 		'Tonstudio Braun',
 		'Bastei-Verlag',
 		'Comicon S.L.',
