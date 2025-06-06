@@ -327,6 +327,7 @@ const mediumsTyps = {
 	},
 	'3-LP': { sides: 2, format: ['12"-Vinyl, 33 1/3 rpm'], mbmedium: '12" Vinyl', mbpackaging: 'Cardboard/Paper Sleeve' },
 	'3-Bild-LP-Schuber': { sides: 2, format: ['12"-Vinyl, 33 1/3 rpm'], mbmedium: '12" Vinyl', mbpackaging: 'Box' },
+	'3-LP-Box': { sides: 2, format: ['12"-Vinyl, 33 1/3 rpm'], mbmedium: '12" Vinyl', mbpackaging: 'Box' },
 	'5-LP-Box': { sides: 2, format: ['12"-Vinyl, 33 1/3 rpm'], mbmedium: '12" Vinyl', mbpackaging: 'Box' },
 	'6-LP-Box': { sides: 2, format: ['12"-Vinyl, 33 1/3 rpm'], mbmedium: '12" Vinyl', mbpackaging: 'Box' },
 	MC: { sides: 2, format: ['Musik-Cassette'], mbmedium: 'Cassette', mbpackaging: 'Cassette Case' },
@@ -1232,6 +1233,7 @@ async function createBasicUI() {
 			language: 'deu',
 			script: 'Latn',
 			status: 'Official',
+			barcode: episode.releaseinfos.barcode ? episode.releaseinfos.barcode : 'none',
 			mediums: generateMediums(),
 			urls: [
 				{
