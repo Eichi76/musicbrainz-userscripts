@@ -9,6 +9,7 @@ import { createReleaseSeederForm } from '@kellnerd/musicbrainz-scripts/src/seedi
 console.log('Hörspielforscher triggered');
 
 // TODO: Wenn keine Crew bzw Sprecher vorhanden verhindern das der Kopier Button geklickt werden kann
+// TODO: Medium mit Seiten werden nicht richtig erkannt. Vor allen wenn es sich um mehr als 1 Medium handelt.
 // #region little helpers
 /**
  * @description  Entfernt unnötig Zeichen aus dem String
@@ -1320,11 +1321,12 @@ async function createBasicUI() {
 			tracksPerMedium.forEach((medium) => {
 				let tracks = [];
 				for (let index = 0; index < medium; index++) {
+					let tracknumber = episode.releaseinfos.mediumsinfo.sides === 2 ? String.fromCharCode(65 + index) : index + 1;
 					let track = {
 						name: `${episode.releaseinfos.episodeTitle}, ${
 							episode.releaseinfos.mediumsinfo.sides === 1 ? 'Kapitel' : 'Seite'
 						} ${totalCounter + 1}`,
-						number: index + 1,
+						number: `${tracknumber}`,
 					};
 					if (equalTrackCount) {
 						track['length'] = episode.releaseinfos.runtimes[totalCounter];
