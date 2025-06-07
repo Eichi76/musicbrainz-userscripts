@@ -1305,6 +1305,10 @@ async function createBasicUI() {
 		}
 		function generateMediums(tracksPerMedium = []) {
 			let mediums = [];
+			if (!episode.releaseinfos.runtimes) {
+				episode.releaseinfos['runtimes'] = [];
+				episode.releaseinfos.runtimes.push('00:00');
+			}
 			if (tracksPerMedium.length === 0) {
 				for (
 					let index = 0;
@@ -1330,7 +1334,7 @@ async function createBasicUI() {
 						} ${totalCounter + 1}`,
 						number: `${tracknumber}`,
 					};
-					if (equalTrackCount) {
+					if (equalTrackCount && episode.releaseinfos.runtimes[0] != '00:00') {
 						track['length'] = episode.releaseinfos.runtimes[totalCounter];
 					}
 					totalCounter++;
