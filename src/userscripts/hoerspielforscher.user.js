@@ -1143,14 +1143,18 @@ async function createBasicUI() {
 							//copyString = JSON.stringify(jsonFromCrew());
 							const crewArray = [];
 
-							episode.crew.forEach((obj) => {
-								//console.log('obj', obj);
-								crewArray.push(obj.mb);
-							});
-							episode.actors.forEach((obj) => {
-								//console.log('obj', obj);
-								crewArray.push(obj.mb);
-							});
+							if (episode.crew) {
+								episode.crew.forEach((obj) => {
+									//console.log('obj', obj);
+									crewArray.push(obj.mb);
+								});
+							}
+							if (episode.actors) {
+								episode.actors.forEach((obj) => {
+									//console.log('obj', obj);
+									crewArray.push(obj.mb);
+								});
+							}
 							if (crewArray.length) {
 								crewArray.push({ importUrl: episode.releaseinfos.releaseUrl });
 							}

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Hoerspielforscher Musicbrainz Import
-// @version       2025.6.7.103936
+// @version       2025.6.28.7436
 // @namespace     https://github.com/Eichi76/musicbrainz-userscripts
 // @author        Eichi76
 // @description   Importiert Hörspielproduktionen von Hoerspielforschern
@@ -1671,14 +1671,18 @@ td.right {
 								//copyString = JSON.stringify(jsonFromCrew());
 								const crewArray = [];
 
-								episode.crew.forEach((obj) => {
-									//console.log('obj', obj);
-									crewArray.push(obj.mb);
-								});
-								episode.actors.forEach((obj) => {
-									//console.log('obj', obj);
-									crewArray.push(obj.mb);
-								});
+								if (episode.crew) {
+									episode.crew.forEach((obj) => {
+										//console.log('obj', obj);
+										crewArray.push(obj.mb);
+									});
+								}
+								if (episode.actors) {
+									episode.actors.forEach((obj) => {
+										//console.log('obj', obj);
+										crewArray.push(obj.mb);
+									});
+								}
 								if (crewArray.length) {
 									crewArray.push({ importUrl: episode.releaseinfos.releaseUrl });
 								}
