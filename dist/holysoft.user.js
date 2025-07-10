@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name          Holysoft Musicbrainz Import
-// @version       2025.2.23
+// @version       2025.7.10.12584
 // @namespace     https://github.com/Eichi76/musicbrainz-userscripts
 // @author        Eichi76
 // @description   Importiert Hörspielproduktionen aus dem Holysoft Shop und erstellt einen String, um die entsprechende Crew bei Musicbrainz hinzuzufügen.
 // @homepageURL   https://github.com/Eichi76/musicbrainz-userscripts#holysoft-musicbrainz-import
-// @downloadURL   https://raw.github.com/Eichi76/musicbrainz-userscripts/main/dist/holysoft.user.js
-// @updateURL     https://raw.github.com/Eichi76/musicbrainz-userscripts/main/dist/holysoft.user.js
+// @downloadURL   https://raw.github.com/Eichi76/musicbrainz-userscripts/hoerspielforscher/dist/holysoft.user.js
+// @updateURL     https://raw.github.com/Eichi76/musicbrainz-userscripts/hoerspielforscher/dist/holysoft.user.js
 // @supportURL    https://github.com/Eichi76/musicbrainz-userscripts/issues
 // @grant         none
 // @match         *://shop.holysoft.de/produkte/*
@@ -64,7 +64,9 @@
 		sections = sections.map((section) => section.trim());
 
 		if (typeof GM_info !== 'undefined') {
-			sections.push(`${GM_info.script.name} (v${GM_info.script.version}, ${GM_info.script.namespace})`);
+			//sections.push(`${GM_info.script.name} (v${GM_info.script.version}, ${GM_info.script.namespace})`);
+			sections.push(`${GM_info.script.name} (Eichi76 dev version) ( (v${GM_info.script.version})`);
+
 		}
 
 		// drop empty sections and keep only the last occurrence of duplicate sections
@@ -618,7 +620,7 @@
 		let job = 'Spoken_vocals';
 		let actorsDetails = qsa('#product_mitwirkende > .product_full_extrainfo_right > p');
 		Array.from(actorsDetails).map((p) => {
-			let actor = Array.from(qsa('a', p));
+			let actor = Array.from(qsa('span', p));
 			let element = {};
 			if (job in relMapping) {
 				element['id'] = relMapping[job].id;
@@ -713,14 +715,14 @@
 		let crewDetails = qsa('#product_mitwirkende > .product_full_extrainfo_left > p');
 		Array.from(crewDetails).map((p) => {
 			let job = convertRelName(qs('b', p).innerText.trim());
-			Array.from(qsa('a', p)).map((a) => {
+			Array.from(qsa('span', p)).map((span) => {
 				let member = {};
 				if (job in relMapping) {
 					member['id'] = relMapping[job].id;
 					member['uuid'] = relMapping[job].uuid;
 					member['relType'] = relMapping[job].relTyp;
 				}
-				member['artist'] = a.innerText.trim();
+				member['artist'] = span.innerText.trim();
 				crew.push(member);
 			});
 		});
