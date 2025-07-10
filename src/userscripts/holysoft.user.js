@@ -172,7 +172,7 @@ function collectActors() {
 	let job = 'Spoken_vocals';
 	let actorsDetails = qsa('#product_mitwirkende > .product_full_extrainfo_right > p');
 	Array.from(actorsDetails).map((p) => {
-		let actor = Array.from(qsa('a', p));
+		let actor = Array.from(qsa('span', p));
 		let element = {};
 		if (job in relMapping) {
 			element['id'] = relMapping[job].id;
@@ -273,14 +273,14 @@ function collectCrew() {
 	let crewDetails = qsa('#product_mitwirkende > .product_full_extrainfo_left > p');
 	Array.from(crewDetails).map((p) => {
 		let job = convertRelName(qs('b', p).innerText.trim());
-		Array.from(qsa('a', p)).map((a) => {
+		Array.from(qsa('span', p)).map((span) => {
 			let member = {};
 			if (job in relMapping) {
 				member['id'] = relMapping[job].id;
 				member['uuid'] = relMapping[job].uuid;
 				member['relType'] = relMapping[job].relTyp;
 			}
-			member['artist'] = a.innerText.trim();
+			member['artist'] = span.innerText.trim();
 			crew.push(member);
 		});
 	});

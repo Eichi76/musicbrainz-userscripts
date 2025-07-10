@@ -21,6 +21,20 @@ Um ein Skript zu installieren, klicke einfach auf die Schaltfläche _Installiere
 
 ## Userscripts
 
+### Hoerspielforscher Musicbrainz Import
+
+Importiert Hörspielproduktionen von Hoerspielforschern
+- Erstellt ein Importer Element um Hörspiele von **[Hörspielforscher](https://hoerspielforscher.de/)** in Musicbrainz zu hinzuzufügen
+- Erlaubt dem Benutzer, permanente Namenszuweisungen zu bestehenden MBIDs des Künstlers/Labels/Veröffentlichungsgruppe/Serie einzugeben.
+- Erkennt Serie/Folgennummer/Folgenname und erzeugt daraus einen eindeutigen Albumnamen, der geändert werden kann.
+- Identifiziert die Anzahl der Medien der Veröffentlichung, sofern diese Information auf der Seite verfügbar ist.
+- (in Planung) Für jedes Medium kann die Anzahl der Titel festgelegt werden, die dann mit beispielhaften Titelnamen an Musicbrainz übergeben werden.
+- Erstellt einen Button, um die Sprecherrollen in die Zwischenablage zu kopieren, die dann mit **[Kellnerds Voice Actor Credits-Skript](https://github.com/kellnerd/musicbrainz-scripts?tab=readme-ov-file#voice-actor-credits)** eingefügt werden können.
+- (optional|in Entwickluckung) Kopieren eines JSON Strings der gesamten Crew in die Zwischenablage welches mit **[Kellnerds Voice Actor Credits-Skript](https://github.com/kellnerd/musicbrainz-scripts?tab=readme-ov-file#voice-actor-credits)** eingefügt werden kann
+
+[![Install](https://img.shields.io/badge/Install-success.svg?style=for-the-badge&logo=tampermonkey)](dist/hoerspielforscher.user.js?raw=1)
+[![Source](https://img.shields.io/badge/Source-grey.svg?style=for-the-badge&logo=github)](dist/hoerspielforscher.user.js)
+
 ### Holysoft Musicbrainz Import
 
 Importiert Hörspielproduktionen aus dem Holysoft Shop und erstellt einen String, um die entsprechende Crew bei Musicbrainz hinzuzufügen.
@@ -33,3 +47,13 @@ Importiert Hörspielproduktionen aus dem Holysoft Shop und erstellt einen String
 
 [![Install](https://img.shields.io/badge/Install-success.svg?style=for-the-badge&logo=tampermonkey)](dist/holysoft.user.js?raw=1)
 [![Source](https://img.shields.io/badge/Source-grey.svg?style=for-the-badge&logo=github)](dist/holysoft.user.js)
+
+## Bookmarklets
+
+### [Copy Hoerspielforscher Url](src/bookmarklets/copyHoerspielforscherUrl.js)
+
+Kopiert den relevanten Teil einer Hoerspielforscher URL in die Zwischenablage
+
+```js
+javascript:(()=>{const i=new URL(window.location);"https://hoerspielforscher.de"==i.origin&&navigator.clipboard?.writeText(""+(i.origin+i.pathname+i.search.split("&")[0]))})();
+```
